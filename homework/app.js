@@ -4,6 +4,8 @@ const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
 
+const CookieParser = require("cookie-parser");
+const session = require("express-session");
 const loginRouter = require("./routes/login");
 const visitRouter = require("./routes/visit");
 const uploadRouter = require("./routes/upload");
@@ -38,5 +40,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(app.get("port"), () => {
-  console.log(`http://localhost:${app.get("port")}에서 대기중`);
+  console.log(`http://localhost:${app.get("port")} 대기중`);
 });

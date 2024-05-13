@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="./frontUser.css" />
+  </head>
+
+  <body>
+    <header><%- include('./header') %></header>
+    <h2><%= title %></h2>
+    <div>
+      <form
+        id="form"
+        action="/upload"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <label>전송할 파일</label>
+        <input type="file" name="image" /><br />
+        <label>파일 이름</label>
+        <input type="text" name="title" />
+        <p>
+          <button type="submit">Upload</button>
+        </p>
+      </form>
+    </div>
+
+    <footer><%- include('./footer') %></footer>
+  </body>
+</html>
