@@ -7,7 +7,7 @@ const path = require("path");
 const CookieParser = require("cookie-parser");
 const session = require("express-session");
 const loginRouter = require("./routes/login");
-const visitRouter = require("./routes/visit");
+const departRouter = require("./routes/depart");
 const uploadRouter = require("./routes/upload");
 
 const app = express();
@@ -20,8 +20,22 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: "mySign",
+    cookie: {
+      httpOnly: true,
+      secure: false,
+      maxAge: 600000,
+    },
+    name: "my-session-cookie",
+  })
+);
+
 app.use("/", loginRouter);
-app.use("/visit", visitRouter);
+app.use("/depart", departRouter);
 app.use("/upload", uploadRouter);
 
 // app.use(req,res,next)=>{

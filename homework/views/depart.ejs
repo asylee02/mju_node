@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="./frontUser.css" />
+  </head>
+  <body>
+    <header><%- include('./header') %></header>
+    <% if(name){ %>
+    <h3><%= name %>님 환영합니다</h3>
+    <% } %>
+    <h3>새로운 항공기 출발 정보 등록</h3>
+    <div>
+      <form id="form" method="post">
+        <label>airline:</label>
+        <input type="text" name="airline" />
+        <!-- "ariline"을 "airline"으로 수정 -->
+        <br />
+        <label>to:</label>
+        <input type="text" name="to" />
+        <br />
+        <label>gate:</label>
+        <input type="text" name="gate" />
+        <button type="submit">제출</button>
+      </form>
+    </div>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>airline</th>
+            <th>to</th>
+            <th>gate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% flights.forEach((item) => { %>
+          <!-- map 함수 대신 forEach 함수로 변경 -->
+          <tr>
+            <td><%= item.airline %></td>
+            <!-- th 대신 td로 수정 및 <%= %> 추가 -->
+            <td><%= item.to %></td>
+            <td><%= item.gate %></td>
+            <th><button id="edit">수정</button></th>
+            <th><button id="delete">삭제</button></th>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+    <footer><%- include('./footer') %></footer>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./frontUser.js"></script>
+  </body>
+</html>

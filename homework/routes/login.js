@@ -9,23 +9,25 @@ router.get("/", (req, res) => {
   res.redirect("/login");
 });
 
-router.get("/login", (req, res) => {
-  res.render("login", { title: "Login" });
-});
-
 router
-  .route("/admit")
+  .route("/login")
   .get((req, res) => {
-    console.log(req.query);
-    console.log(req.body);
-    res.send(`username: ${req.query.login}<br>
-        password : ${req.query.password}`);
+    console.log("login");
+    const username = req.session.userid;
+    console.log(username);
+    res.render("login", { title: "Login", name: username });
   })
   .post((req, res) => {
+    const id = req.body.login;
+    const pw = req.body.password;
     console.log(req.query);
     console.log(req.body);
-    res.send(`username: ${req.body.login}<br>
-                 password : ${req.body.password}`);
+    if (id === "staff" && pw === "staff") {
+      req.session.userid = id;
+      res.render("login", { title: "Login", name: id });
+    } else {
+      res.render("login", { title: "Login" });
+    }
   });
 
 module.exports = router;

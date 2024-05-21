@@ -8,10 +8,12 @@
   </head>
   <body>
     <header><%- include('./header') %></header>
+    <% if(name){ %>
+    <h2><%= name %>님 환영합니다.</h2>
+    <% } else { %>
     <h2><%= title %></h2>
-
     <div>
-      <form id="form" action="/admit" method="post">
+      <form id="form" method="post">
         <label>UserName</label>
         <input type="text" name="login" /><br />
         <label>Password</label>
@@ -21,7 +23,7 @@
         </p>
       </form>
     </div>
-
+    <% } %>
     <footer><%- include('./footer') %></footer>
   </body>
 </html>
