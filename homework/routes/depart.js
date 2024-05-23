@@ -26,9 +26,24 @@ router.post("/", (req, res) => {
   res.render("depart", { title: "deaprt", name: username, flights: flights });
 });
 
-router.put("/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
+  const username = req.session.userid;
   const id = req.params.id;
-  console.log(id);
+  const index = flights.findIndex((flight) => flight.id === id);
+  flights.splice(index, 1);
+  res.render("depart", { title: "deaprt", name: username, flights: flights });
+});
+
+router.put("/:id", (req, res) => {
+  const username = req.session.userid;
+  const id = req.params.id;
+  const airline = req.body.airline;
+  const to = req.body.to;
+  const gate = Number(req.body.gate);
+  const index = flights.findIndex((flight) => flight.id === id);
+  flights[index] = { id, airline, to, gate };
+  console.log(flights);
+  res.render("depart", { title: "deaprt", name: username, flights: flights });
 });
 
 module.exports = router;

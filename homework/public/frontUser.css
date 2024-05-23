@@ -4,3 +4,25 @@ body {
 span {
   padding-right: 20px;
 }
+
+#editTo,
+#editGate,
+#editAirline {
+  width: 70px;
+}
+
+#editPopup {
+  width: 20%;
+  height: 20%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  background-color: white;
+  border: 2px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 20;
+}

@@ -6,11 +6,12 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="./frontUser.css" />
   </head>
-  <body>
+  <body id="departBg">
     <header><%- include('./header') %></header>
     <% if(name){ %>
     <h3><%= name %>님 환영합니다</h3>
     <% } %>
+
     <h3>새로운 항공기 출발 정보 등록</h3>
     <div>
       <form id="form" method="post">
@@ -27,6 +28,21 @@
       </form>
     </div>
     <div>
+      <div id="editPopup">
+        <div>
+          <label for="editAirline">Airline :</label>
+          <input id="editAirline" type="text" />
+        </div>
+        <div>
+          <label for="editTo">To :</label>
+          <input id="editTo" type="text" />
+        </div>
+        <div>
+          <label for="editGate">Gate :</label>
+          <input id="editGate" type="text" />
+        </div>
+        <button id="editPopupButton">수정하기</button>
+      </div>
       <table>
         <thead>
           <tr>
@@ -35,7 +51,7 @@
             <th>gate</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="departTbody">
           <% flights.forEach((item) => { %>
           <!-- map 함수 대신 forEach 함수로 변경 -->
           <tr>
@@ -43,8 +59,8 @@
             <!-- th 대신 td로 수정 및 <%= %> 추가 -->
             <td><%= item.to %></td>
             <td><%= item.gate %></td>
-            <th><button id="edit">수정</button></th>
-            <th><button id="delete">삭제</button></th>
+            <th><button id="edit" data-id="<%= item.id %>">수정</button></th>
+            <th><button id="delete" data-id="<%= item.id %>">삭제</button></th>
           </tr>
           <% }); %>
         </tbody>
