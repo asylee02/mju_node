@@ -6,10 +6,9 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="./frontUser.css" />
   </head>
-
   <body>
     <header><%- include('./header') %></header>
-    <h2><%= title %></h2>
+    <h2>File Upload</h2>
     <div>
       <form
         id="form"
@@ -18,15 +17,27 @@
         enctype="multipart/form-data"
       >
         <label>전송할 파일</label>
-        <input type="file" name="image" /><br />
+        <input type="file" name="manyImage" multiple /><br />
         <label>파일 이름</label>
         <input type="text" name="title" />
         <p>
           <button type="submit">Upload</button>
         </p>
       </form>
+      <div>
+        <% if ( airplane !== 'undefined' && airplane) { %>
+        <p>항공기명: <%= airplane %></p>
+        <p>기내식 사진:</p>
+        <ul>
+          <% if (filenames && filenames.length > 0) { %> <%
+          filenames.forEach((item)=> { %>
+          <li><%= item.originalname %></li>
+          <% }); %> <% } else { %>
+          <li>업로드된 파일이 없습니다.</li>
+          <% } %>
+        </ul>
+      </div>
+      <%}%>
     </div>
-
-    <footer><%- include('./footer') %></footer>
   </body>
 </html>

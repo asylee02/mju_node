@@ -4,27 +4,37 @@ const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
 
-const CookieParser = require("cookie-parser");
 const session = require("express-session");
 const loginRouter = require("./routes/login");
 const departRouter = require("./routes/depart");
 const uploadRouter = require("./routes/upload");
+const dotenv = require("dotenv");
+const fs = require("fs");
 
+dotenv.config();
+const { PORT, COOKIE_SECRET } = process.env;
 const app = express();
-app.set("port", process.env.PORT || 3000);
+app.set("port", PORT || 3000);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+
+try {
+  fs.readdirSync("./uploads");
+} catch (error) {
+  console.log("upload 파일이 없어서 파일 생성");
+  fs.mkdirSync("uploads");
+}
 
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
+console.log(COOKIE_SECRET);
 app.use(
   session({
     resave: false,
     saveUninitialized: false,
-    secret: "mySign",
+    secret: COOKIE_SECRET,
     cookie: {
       httpOnly: true,
       secure: false,
