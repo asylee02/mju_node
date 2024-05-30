@@ -1,3 +1,4 @@
+<!-- 고급웹프로그래밍 과제#2 이상연 60211684 -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,7 +18,6 @@
       <form id="form" method="post">
         <label>항공사:</label>
         <input type="text" name="airline" />
-        <!-- "ariline"을 "airline"으로 수정 -->
         <br />
         <label>출발지:</label>
         <input type="text" name="to" />
@@ -35,6 +35,21 @@
       </form>
     </div>
     <div>
+      <div id="editPopup" >
+        <div>
+          <label for="editAirline">Airline :</label>
+          <input id="editAirline" type="text" />
+        </div>
+        <div>
+          <label for="editTo">To :</label>
+          <input id="editTo" type="text" />
+        </div>
+        <div>
+          <label for="editGate">Gate :</label>
+          <input id="editGate" type="text" />
+        </div>
+        <button id="editPopupButton">수정하기</button>
+      </div>
       <table>
         <thead>
           <tr>

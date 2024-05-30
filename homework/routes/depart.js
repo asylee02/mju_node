@@ -1,4 +1,4 @@
-// 수업참여 0430 - 이상연 60211684
+//  고급웹프로그래밍 과제#2 이상연 60211684
 
 const express = require("express");
 const morgan = require("morgan");

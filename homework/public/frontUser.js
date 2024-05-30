@@ -1,3 +1,4 @@
+//  고급웹프로그래밍 과제#2 이상연 60211684 
 document.addEventListener("DOMContentLoaded", () => {
   const editTicketButton = document.querySelector(".ticket_edit");
   const deleteTicketButton = document.querySelector(".ticket_delete");
