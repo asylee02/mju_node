@@ -15,52 +15,81 @@
     <h3>새로운 항공기 출발 정보 등록</h3>
     <div>
       <form id="form" method="post">
-        <label>airline:</label>
+        <label>항공사:</label>
         <input type="text" name="airline" />
         <!-- "ariline"을 "airline"으로 수정 -->
         <br />
-        <label>to:</label>
+        <label>출발지:</label>
         <input type="text" name="to" />
         <br />
-        <label>gate:</label>
-        <input type="text" name="gate" />
+        <label>목적지:</label>
+        <input type="text" name="destination" />
+        <br />
+        <label>출발 시간:</label>
+        <input type="text" name="departure_time" />
+        <br />
+        <label>도착 시간:</label>
+        <input type="text" name="arrival_time" />
+        <br />
         <button type="submit">제출</button>
       </form>
     </div>
     <div>
-      <div id="editPopup">
-        <div>
-          <label for="editAirline">Airline :</label>
-          <input id="editAirline" type="text" />
-        </div>
-        <div>
-          <label for="editTo">To :</label>
-          <input id="editTo" type="text" />
-        </div>
-        <div>
-          <label for="editGate">Gate :</label>
-          <input id="editGate" type="text" />
-        </div>
-        <button id="editPopupButton">수정하기</button>
-      </div>
       <table>
         <thead>
           <tr>
-            <th>airline</th>
-            <th>to</th>
-            <th>gate</th>
+            <th>항공사</th>
+            <th>출발지</th>
+            <th>목적지</th>
+            <th>출발 시간</th>
+            <th>도착 시간</th>
           </tr>
         </thead>
         <tbody id="departTbody">
           <% flights.forEach((item) => { %>
           <!-- map 함수 대신 forEach 함수로 변경 -->
           <tr>
-            <td><%= item.airline %></td>
+            <td><%= item.dataValues.airline %></td>
             <!-- th 대신 td로 수정 및 <%= %> 추가 -->
-            <td><%= item.to %></td>
-            <td><%= item.gate %></td>
-            <th><button id="edit" data-id="<%= item.id %>">수정</button></th>
-            <th><button id="delete" data-id="<%= item.id %>">삭제</button></th>
+            <td><%= item.dataValues.origin %></td>
+            <td><%= item.dataValues.destination %></td>
+            <td><%= item.dataValues.departure_time %></td>
+            <td><%= item.dataValues.arrival_time %></td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>티켓 정보</h3>
+    <button class="ticket_edit">수정</button>
+    <button class="ticket_delete">삭제</button>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>티켓번호</th>
+            <th>승객명</th>
+            <th>좌석 번호</th>
+            <th>항공사</th>
+            <th>출발지</th>
+            <th>도착지</th>
+            <th>출발 시간</th>
+            <th>도착 시간</th>
+          </tr>
+        </thead>
+        <tbody id="departTbody">
+          <% tickets.forEach((item) => { %>
+          <tr>
+            <!-- <p><%= item%></p> -->
+            <td><%= item.ticket_id %></td>
+            <td><%= item.passenger_name %></td>
+            <td><%= item.seat_number %></td>
+            <td><%= item.airline %></td>
+            <td><%= item.origin %></td>
+            <td><%= item.destination %></td>
+            <td><%= item.departure_time %></td>
+            <td><%= item.arrival_time %></td>
           </tr>
           <% }); %>
         </tbody>

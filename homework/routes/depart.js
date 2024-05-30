@@ -5,45 +5,51 @@ const morgan = require("morgan");
 const path = require("path");
 const fs = require("fs").promises;
 const flights = require("../public/flights.js");
-
+const Flight = require("../models/flight.js");
+const Ticket = require("../models/ticket.js");
+const { sequelize } = require("../models/");
 const router = express.Router();
-const flights_len = flights.length;
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   const username = req.session.userid;
-  console.log(flights);
-  res.render("depart", { title: "deaprt", name: username, flights: flights });
-});
+  const flight = await Flight.findAll({});
 
-router.post("/", (req, res) => {
-  const username = req.session.userid;
-  console.log(req.body);
-  flights.push({
-    id: flights_len + 1,
-    airline: req.body.airline,
-    to: req.body.to,
-    gate: req.body.gate,
+  const tickets = await sequelize.query(
+    "SELECT * FROM tickets NATURAL JOIN flights"
+  );
+  res.render("depart", {
+    title: "deaprt",
+    name: username,
+    flights: flight,
+    tickets: tickets[0],
   });
-  res.render("depart", { title: "deaprt", name: username, flights: flights });
+});
+router.post("/", async (req, res) => {
+  console.log(req.body);
+  await Flight.create({
+    airline: req.body.airline,
+    origin: req.body.to,
+    destination: req.body.destination,
+    departure_time: req.body.departure_time,
+    arrival_time: req.body.arrival_time,
+  });
+  // POST 요청을 처리한 후 리다이렉트
+  res.redirect("/depart");
 });
 
-router.delete("/:id", (req, res) => {
-  const username = req.session.userid;
-  const id = req.params.id;
-  const index = flights.findIndex((flight) => flight.id === id);
-  flights.splice(index, 1);
-  res.render("depart", { title: "deaprt", name: username, flights: flights });
-});
-
-router.put("/:id", (req, res) => {
-  const username = req.session.userid;
-  const id = req.params.id;
-  const airline = req.body.airline;
-  const to = req.body.to;
-  const gate = Number(req.body.gate);
-  const index = flights.findIndex((flight) => flight.id === id);
-  flights[index] = { id, airline, to, gate };
-  console.log(flights);
-  res.render("depart", { title: "deaprt", name: username, flights: flights });
+router.put("/", async (req, res) => {
+  // console.log(req.body);
+  await Ticket.update(
+    {
+      seat_number: req.body.seat,
+    },
+    {
+      where: { ticket_id: req.body.id },
+    }
+  )
+    .then((res) => console.log(res))
+    .catch((err) => console.error(err));
+  // res.redirect("/depart");
+  res.end();
 });
 
 module.exports = router;

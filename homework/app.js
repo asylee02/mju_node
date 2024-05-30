@@ -8,8 +8,20 @@ const session = require("express-session");
 const loginRouter = require("./routes/login");
 const departRouter = require("./routes/depart");
 const uploadRouter = require("./routes/upload");
+
 const dotenv = require("dotenv");
 const fs = require("fs");
+
+const { sequelize } = require("./models/");
+
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    console.log("model-DB table간 동기화 성공!");
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 dotenv.config();
 const { PORT, COOKIE_SECRET } = process.env;
