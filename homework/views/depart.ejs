@@ -7,7 +7,7 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="./frontUser.css" />
   </head>
-  <body id="departBg">
+  <body id="departBg" style="position: relative;">
     <header><%- include('./header') %></header>
     <% if(name){ %>
     <h3><%= name %>님 환영합니다</h3>
@@ -53,6 +53,7 @@
       <table>
         <thead>
           <tr>
+            <th>항공기 번호</th>
             <th>항공사</th>
             <th>출발지</th>
             <th>목적지</th>
@@ -64,6 +65,7 @@
           <% flights.forEach((item) => { %>
           <!-- map 함수 대신 forEach 함수로 변경 -->
           <tr>
+            <td><%= item.dataValues.flight_id %></td>
             <td><%= item.dataValues.airline %></td>
             <!-- th 대신 td로 수정 및 <%= %> 추가 -->
             <td><%= item.dataValues.origin %></td>
@@ -76,7 +78,33 @@
       </table>
     </div>
 
+    <div class="pop-up" style="position: absolute; width: 500px; height:500px; border:solid 1px; top:50%; left:50%; z-index: 20;  transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; background-color: white; display: none;">
+        <p style="font-size: 25px; font-weight: bold; margin-bottom: 50px;text-align: center;">티켓 추가하기</p>
+
+        <form action="" style="width:100%; display: flex; flex-direction: column; align-items: center; justify-content: center; ">
+          <div style="width: 100%; margin-bottom: 15px; font-size: 20px; font-weight: bold; display: flex; justify-content: center;">
+            <label for="">승객명: </label>
+            <input type="text" style="width: 50%; height: 30px; margin-left:10px"/>
+          </div>
+          <div style="width: 100%; margin-bottom: 15px; font-size: 20px; font-weight: bold; display: flex; justify-content: center;">
+            <label for="">좌석 번호: </label>
+            <input type="text" style="width: 50%; height: 30px; margin-left:10px"/>
+          </div>
+          <div style="width: 100%; margin-bottom: 15px; font-size: 20px; font-weight: bold; display: flex; justify-content: center;">
+            <label for="">항공기 번호: </label>
+            <input type="text" style="width: 50%; height: 30px; margin-left:10px"/>
+          </div>
+            <button class="create_confirm" style="width:80%; height:50px; font-size: 20px; background-color: black; color: white; margin-top:30px; margin-bottom:30px; border: none; font-weight: bold;">
+              추가하기
+            </button>
+            <button type="button" class="create_cancel" style="width:80%; height:50px; font-size: 20px; background-color: lightgray;  border:none; font-weight: bold;">
+              닫기
+            </button>
+        </form>
+    </div>
+
     <h3>티켓 정보</h3>
+    <button class="ticket_create">추가</button>
     <button class="ticket_edit">수정</button>
     <button class="ticket_delete">삭제</button>
     <div>

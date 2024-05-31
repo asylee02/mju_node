@@ -104,3 +104,13 @@ span {
 #editPopup > div > input {
   width: 100px;
 }
+
+:hover.create_confirm {
+  cursor: pointer;
+  opacity: 80%;
+}
+
+:hover.create_cancel {
+  cursor: pointer;
+  opacity: 80%;
+}

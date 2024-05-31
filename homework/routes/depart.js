@@ -16,6 +16,7 @@ router.get("/", async (req, res) => {
   const tickets = await sequelize.query(
     "SELECT * FROM tickets NATURAL JOIN flights"
   );
+  console.log(tickets);
   res.render("depart", {
     title: "deaprt",
     name: username,
