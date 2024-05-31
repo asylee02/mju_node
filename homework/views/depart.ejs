@@ -81,18 +81,18 @@
     <div class="pop-up" style="position: absolute; width: 500px; height:500px; border:solid 1px; top:50%; left:50%; z-index: 20;  transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; background-color: white; display: none;">
         <p style="font-size: 25px; font-weight: bold; margin-bottom: 50px;text-align: center;">티켓 추가하기</p>
 
-        <form action="" style="width:100%; display: flex; flex-direction: column; align-items: center; justify-content: center; ">
+        <form class="create_ticket_form" action="/depart/ticket" method="post" style="width:100%; display: flex; flex-direction: column; align-items: center; justify-content: center; ">
           <div style="width: 100%; margin-bottom: 15px; font-size: 20px; font-weight: bold; display: flex; justify-content: center;">
             <label for="">승객명: </label>
-            <input type="text" style="width: 50%; height: 30px; margin-left:10px"/>
+            <input name="passenger_name" type="text" style="width: 50%; height: 30px; margin-left:10px"/>
           </div>
           <div style="width: 100%; margin-bottom: 15px; font-size: 20px; font-weight: bold; display: flex; justify-content: center;">
             <label for="">좌석 번호: </label>
-            <input type="text" style="width: 50%; height: 30px; margin-left:10px"/>
+            <input name="seat_number" type="text" style="width: 50%; height: 30px; margin-left:10px"/>
           </div>
           <div style="width: 100%; margin-bottom: 15px; font-size: 20px; font-weight: bold; display: flex; justify-content: center;">
             <label for="">항공기 번호: </label>
-            <input type="text" style="width: 50%; height: 30px; margin-left:10px"/>
+            <input name="flight_id" type="text" style="width: 50%; height: 30px; margin-left:10px"/>
           </div>
             <button class="create_confirm" style="width:80%; height:50px; font-size: 20px; background-color: black; color: white; margin-top:30px; margin-bottom:30px; border: none; font-weight: bold;">
               추가하기
