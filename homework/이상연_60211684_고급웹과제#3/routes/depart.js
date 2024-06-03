@@ -6,20 +6,26 @@ const Ticket = require('../models/ticket.js')
 const { sequelize } = require('../models/')
 const router = express.Router()
 router.get('/', async (req, res) => {
-  const username = req.session.userid
+  console.log('헬로 요기야')
   const flight = await Flight.findAll({})
 
   const tickets = await sequelize.query(
     'SELECT * FROM tickets NATURAL JOIN flights ORDER BY ticket_id ASC'
   )
-  console.log(tickets)
+  res.setHeader(
+    'Cache-Control',
+    'no-store, no-cache, must-revalidate, proxy-revalidate'
+  )
+  res.setHeader('Pragma', 'no-cache')
+  res.setHeader('Expires', '0')
+  res.setHeader('Surrogate-Control', 'no-store')
   res.render('depart', {
     title: 'deaprt',
-    name: username,
     flights: flight,
     tickets: tickets[0],
   })
 })
+
 router.post('/', async (req, res) => {
   console.log(req.body)
   await Flight.create({

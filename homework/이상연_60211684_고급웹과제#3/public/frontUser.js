@@ -1,9 +1,10 @@
-//  고급웹프로그래밍 과제#2 이상연 60211684
+//  고급웹프로그래밍 과제#3 이상연 60211684
 document.addEventListener('DOMContentLoaded', () => {
   const editTicketButton = document.querySelector('.ticket_edit')
   const deleteTicketButton = document.querySelector('.ticket_delete')
   const createTicketButton = document.querySelector('.ticket_create')
   const create_form = document.querySelector('.create_ticket_form')
+  const flight_form = document.querySelector('#flight_form')
 
   const createCancelButton = document.querySelector('.create_cancel')
   const pop_up = document.querySelector('.pop-up')
@@ -24,6 +25,27 @@ document.addEventListener('DOMContentLoaded', () => {
   deleteTicketButton.addEventListener('click', () => {
     const id = prompt('삭제할 티켓 번호를 입력해주세요')
     axios.delete(`/depart/ticket/${id}`).then(() => {})
+  })
+
+  flight_form.addEventListener('submit', (event) => {
+    event.preventDefault()
+    const formData = new FormData(flight_form)
+    const airline = formData.get('airline')
+    const to = formData.get('to')
+    const destination = formData.get('destination')
+    const departure_time = formData.get('departure_time')
+    const arrival_time = formData.get('arrival_time')
+    if (airline && to && destination && departure_time && arrival_time) {
+      axios.post('/depart', {
+        airline,
+        to,
+        destination,
+        departure_time,
+        arrival_time,
+      })
+    } else {
+      alert('모든 정보를 입력해주세요.')
+    }
   })
 
   create_form.addEventListener('submit', (event) => {

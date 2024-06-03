@@ -1,4 +1,4 @@
-<!-- 고급웹프로그래밍 과제#2 이상연 60211684 -->
+<!-- 고급웹프로그래밍 과제#3 이상연 60211684 -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,13 +9,10 @@
   </head>
   <body id="departBg" style="position: relative">
     <header><%- include('./header') %></header>
-    <% if(name){ %>
-    <h3><%= name %>님 환영합니다</h3>
-    <% } %>
 
     <h3>새로운 항공기 출발 정보 등록</h3>
     <div>
-      <form id="form" method="post">
+      <form id="flight_form" method="post">
         <label>항공사:</label>
         <input type="text" name="airline" />
         <br />
